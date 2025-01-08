@@ -1,23 +1,41 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
+//initalSlice is format or something for intial that how it look like
 const initialState = {
-    todos: [{ id: "0", text: "Learn Redux" }]
-}
+  todos: [{ id: 1, text: "helloWorld" }],
+};
+//its big version of reducer
+// -- but what is reducer
+// -- its a funcnality
+
+// Create Slice:
 
 export const todoSlice = createSlice({
-    name: "todo",
-    initialState,
-    reducers:{
-        addTodo: (state, action) => {
-            const todo = {
-                id: nanoid(),
-                text: action.payload,
-            };
-            state.todos.push(todo);
-        },
-        removeTodo: (state, action) => {
-            state.todos = state.todos.filter((todo) => todo.id !== action.payload);
-        },
-        
-    }
+  name: "todo",
+  initialState,
+  reducers: {
+    // State & action are defult
+    addTodo: (state, action) => {
+      // action is thenew value which u added
+      const todo = { id: nanoid(), text: action.payload };
+      //state take old values from initalState and push new value
+      console.log(todo.id);
+      
+      state.todos.push(todo);
+    },
+    removeTodo: (state, action) => {
+      
+      state.todos = state.todos.filter(todo => {
+        console.log("remove Todo: ",todo.id != action.payload ? true : false);
+        todo.id !== action.payload;
+        // console.log(todo.id);
+      });
+    },
+  },
 });
+//this export is used when we used in components
+export const { addTodo, removeTodo } = todoSlice.actions;
+
+//this is for store
+// --every slice has to be register with store otherwise ther is no meaning of creating
+export default todoSlice.reducer;
