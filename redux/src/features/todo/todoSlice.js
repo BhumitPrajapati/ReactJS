@@ -20,15 +20,13 @@ export const todoSlice = createSlice({
       const todo = { id: nanoid(), text: action.payload };
       //state take old values from initalState and push new value
       console.log(todo.id);
-      
+      console.log(action.payload);
+
       state.todos.push(todo);
     },
     removeTodo: (state, action) => {
-      
-      state.todos = state.todos.filter(todo => {
-        console.log("remove Todo: ",todo.id != action.payload ? true : false);
-        todo.id !== action.payload;
-        // console.log(todo.id);
+      state.todos = state.todos.filter((todo) => {
+        return todo.id !== action.payload;
       });
     },
   },
